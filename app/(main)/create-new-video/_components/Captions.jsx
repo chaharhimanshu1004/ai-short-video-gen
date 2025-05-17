@@ -74,26 +74,30 @@ const options = [
             "textShadow": "2px 2px 4px rgba(0, 0, 0, 0.25)"
         }
     },
-
-
 ]
+
 function Captions({ onHandleInputChange }) {
     const [selectedCaptionStyle, setSelectedCaptionStyle] = useState();
+    
     return (
-        <div className='mt-5'>
-            <h2>Caption Style</h2>
-            <p className='text-sm text-gray-400'>Select Caption Style</p>
+        <div className="space-y-4">
+            <div>
+                <h2 className="text-xl font-semibold mb-2">Caption Style</h2>
+                <p className="text-sm text-gray-400 mb-3">Select caption style</p>
+            </div>
 
-            <div className='flex flex-wrap gap-4 mt-2'>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {options.map((option, index) => (
-                    <div key={index}
+                    <div 
+                        key={index}
                         onClick={() => {
                             setSelectedCaptionStyle(option.name)
                             onHandleInputChange('caption', option)
                         }}
-                        className={`p-2 hover:border bg-slate-900
-                     border-gray-300 cursor-pointer rounded-lg
-                     ${selectedCaptionStyle == option.name && 'border'}`}>
+                        className={`p-3 bg-slate-800 hover:bg-slate-700 transition-colors
+                            border cursor-pointer rounded-lg flex items-center justify-center
+                            ${selectedCaptionStyle === option.name ? 'border-teal-500 shadow-lg shadow-teal-500/10' : 'border-slate-700'}`}
+                    >
                         <h2 style={option.style}>{option.name}</h2>
                     </div>
                 ))}

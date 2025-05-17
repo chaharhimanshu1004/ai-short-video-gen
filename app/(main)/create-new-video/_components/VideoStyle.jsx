@@ -30,34 +30,40 @@ export const options = [
         name: 'Anim',
         image: '/anim.png'
     }
-
 ]
 
 function VideoStyle({ onHandleInputChange }) {
     const [selectedStyle, setSelectedStyle] = useState();
+    
     return (
-        <div className='mt-5'>
-            <h2>Video Styles</h2>
-            <p className='text-sm text-gray-400 mb-1'>Select video style</p>
+        <div className="space-y-4">
+            <div>
+                <h2 className="text-xl font-semibold mb-2">Video Styles</h2>
+                <p className="text-sm text-gray-400 mb-3">Select video style</p>
+            </div>
 
-            <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2'>
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {options?.map((option, index) => (
-                    <div className='relative' key={index}
+                    <div 
+                        className="relative group cursor-pointer transform transition-all duration-200 hover:scale-105"
+                        key={index}
                         onClick={() => {
                             setSelectedStyle(option.name);
                             onHandleInputChange('videoStyle', option.name)
                         }}
                     >
-                        <Image src={option.image}
-                            alt={option.name}
-                            width={500}
-                            height={120}
-                            className={`object-cover h-[90px]
-                            lg:h-[130px] xl:h-[180px] rounded-lg p-1
-                            hover:border border-gray-300 cursor-pointer
-                            ${option.name == selectedStyle && 'border'}`}
-                        />
-                        <h2 className='absolute bottom-1 text-center w-full'>{option.name}</h2>
+                        <div className={`overflow-hidden rounded-xl ${option.name === selectedStyle ? 'ring-2 ring-teal-500' : ''}`}>
+                            <Image 
+                                src={option.image}
+                                alt={option.name}
+                                width={500}
+                                height={120}
+                                className={`object-cover w-full h-[100px] lg:h-[120px] xl:h-[160px] transition-transform duration-300 group-hover:scale-110`}
+                            />
+                        </div>
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2 rounded-b-xl">
+                            <h2 className="text-center text-white font-medium text-sm">{option.name}</h2>
+                        </div>
                     </div>
                 ))}
             </div>
