@@ -2,6 +2,7 @@
 import { auth } from '@/configs/firebaseConfig';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React from 'react'
+import toast from 'react-hot-toast';
 
 function Authentication({ children }) {
     const provider = new GoogleAuthProvider();
@@ -15,10 +16,13 @@ function Authentication({ children }) {
                 const user = result.user;
                 console.log(user)
             }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                const email = error.customData.email;
-                const credential = GoogleAuthProvider.credentialFromError(error);
+                toast.error("Error signing in with Google. Please try again after sometime.", {
+                    style: {
+                        background: '#1e1e1e',
+                        color: '#ffffff',
+                        border: '1px solid #333'
+                    },
+                });
             });
     }
     return (
