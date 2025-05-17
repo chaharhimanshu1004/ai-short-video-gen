@@ -12,7 +12,6 @@ export default function Home() {
       {/* Hero  */}
       <Hero />
 
-      <VideoList explore={true} />
     </div>
   );
 }
