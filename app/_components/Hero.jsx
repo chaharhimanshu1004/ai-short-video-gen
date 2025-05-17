@@ -49,14 +49,6 @@ function Hero() {
           </Button>
         </Authentication>
 
-        <Button
-          size="lg"
-          variant="outline"
-          className="h-14 px-8 bg-gray-900/50 backdrop-blur-sm border border-gray-800 text-gray-200 hover:bg-gray-800 hover:text-white rounded-xl"
-        >
-          <Play className="mr-2 h-4 w-4" />
-          Watch Demo
-        </Button>
       </motion.div>
 
       {/* Feature highlights */}
