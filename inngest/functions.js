@@ -31,7 +31,7 @@ export const helloWorld = inngest.createFunction(
     },
 );
 
-const BASE_URL = 'https://aigurulab.tech';
+const BASE_URL = process.env.AI_IMAGE_GEN_BASE_URL;
 export const GenerateVideoData = inngest.createFunction(
     { id: 'generate-video-data' },
     { event: 'generate-video-data' },
