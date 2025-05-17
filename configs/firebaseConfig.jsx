@@ -13,8 +13,8 @@ const firebaseConfig = {
     projectId: "ai-shortslab",
     storageBucket: "ai-shortslab.firebasestorage.app",
     messagingSenderId: "567724771354",
-    appId: "1:567724771354:web:4f84a62a275f0f9aaaa9a3",
-    measurementId: "G-5N21G1MRS7"
+    appId: "1:567724771354:web:7f30152264542a59aaa9a3",
+    measurementId: "G-WNDEMHY6HJ"
 };
 
 // Initialize Firebase
