@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Topic from './_components/Topic'
 import VideoStyle from './_components/VideoStyle';
 import Voice from './_components/Voice';
@@ -26,6 +26,19 @@ function CreateNewVideo() {
             [fieldName]: fieldValue
         }))
         console.log(formData);
+    }
+
+    useEffect(() => {
+        if (!user) setLoading(true)
+    }, [user])
+
+
+    if (!user) {
+        return (
+            <div className="flex items-center justify-center -mt-12 h-screen">
+                <p className="text-2xl font-bold text-gray-500">Hold on, we are setting things for you...</p>
+            </div>
+        )
     }
 
     const GenerateVideo = async () => {
