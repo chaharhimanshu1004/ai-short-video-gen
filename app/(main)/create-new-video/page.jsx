@@ -69,7 +69,7 @@ function CreateNewVideo() {
     }
 
     return (
-        <div className="container mx-auto py-2 px-4">
+        <div className="container mx-auto py-0 px-4">
             <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent mb-8">Create New Video</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="md:col-span-2 space-y-6">
@@ -81,14 +81,11 @@ function CreateNewVideo() {
                         <VideoStyle onHandleInputChange={onHandleInputChange} />
                     </div>
                     
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <div className="bg-black/75 backdrop-blur-sm rounded-xl border border-slate-700/40 p-6 shadow-lg hover:shadow-slate-700/10">
-                            <Voice onHandleInputChange={onHandleInputChange} />
-                        </div>
-                        
-                        <div className="bg-black/75 backdrop-blur-sm rounded-xl border border-slate-700/40 p-6 shadow-lg hover:shadow-slate-700/10">
-                            <Captions onHandleInputChange={onHandleInputChange} />
-                        </div>
+                    <div className="bg-black/75 backdrop-blur-sm rounded-xl border border-slate-700/40 p-6 shadow-lg hover:shadow-slate-700/10">
+                        <Voice onHandleInputChange={onHandleInputChange} />
+                    </div>
+                    <div className="bg-black/75 backdrop-blur-sm rounded-xl border border-slate-700/40 p-6 shadow-lg hover:shadow-slate-700/10">
+                        <Captions onHandleInputChange={onHandleInputChange} />
                     </div>
                     
                     <Button 

@@ -66,7 +66,7 @@ function Voice({ onHandleInputChange }) {
                 <p className="text-sm text-gray-400 mb-2">Select voice for your video</p>
             </div>
             
-            <ScrollArea className="h-[250px] pr-4 rounded-lg border border-slate-700 bg-slate-800/30">
+            <ScrollArea className="h-[250px] pr-4 rounded-lg border border-black bg-black/75">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4">
                     {voiceOptions.map((voice, index) => (
                         <div

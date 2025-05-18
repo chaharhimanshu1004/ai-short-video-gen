@@ -146,7 +146,7 @@ function Topic({ onHandleInputChange }) {
 
             {!scripts &&
                 <Button
-                    className="mt-6 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20 transition-all duration-300 font-medium hover:shadow-teal-900/30 hover:translate-y-px"
+                    className="mt-6 bg-gradient-to-r from-teal-700 to-cyan-700 hover:from-teal-600 hover:to-cyan-700 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20 transition-all duration-300 font-medium hover:shadow-teal-900/30 hover:translate-y-px"
                     size="sm"
                     disabled={loading}
                     onClick={GenerateScript}
