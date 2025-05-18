@@ -49,7 +49,7 @@ function AppSidebar() {
       <SidebarHeader className="pb-6">
         <div className="px-4 pt-6">
           <div className="flex items-center gap-3 w-full justify-center">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-600 to-cyan-700 flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <h2 className="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-white via-teal-100 to-cyan-100">
@@ -65,7 +65,7 @@ function AppSidebar() {
           <SidebarGroupContent>
             <div className="mx-4 mt-4">
               <Link href={"/create-new-video"}>
-                <Button className="w-full h-12 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20">
+                <Button className="w-full h-12 bg-gradient-to-r from-teal-600 to-cyan-700 hover:from-teal-700 hover:to-cyan-800 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20">
                   <LucideFileVideo className="mr-2 h-4 w-4" />
                   Create New Video
                 </Button>
@@ -108,7 +108,7 @@ function AppSidebar() {
             <h2 className="text-gray-300 font-medium">{user?.credits || 0} Credits Left</h2>
           </div>
           <Link href={"/billing"} className="w-full">
-            <Button className="w-full mt-3 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20">
+            <Button className="w-full mt-3 bg-gradient-to-r from-teal-600 to-cyan-700 hover:from-teal-700 hover:to-cyan-800 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20">
               Buy More Credits
             </Button>
           </Link>
