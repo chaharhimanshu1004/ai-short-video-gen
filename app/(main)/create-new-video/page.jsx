@@ -12,7 +12,7 @@ import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useAuthContext } from '@/app/provider';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import toast from 'react-hot-toast';
 
 function CreateNewVideo() {
     const [formData, setFormData] = useState();
@@ -28,11 +28,6 @@ function CreateNewVideo() {
         console.log(formData);
     }
 
-    useEffect(() => {
-        if (!user) setLoading(true)
-    }, [user])
-
-
     if (!user) {
         return (
             <div className="flex items-center justify-center -mt-12 h-screen">
@@ -43,13 +38,16 @@ function CreateNewVideo() {
 
     const GenerateVideo = async () => {
         if (user?.credits <= 0) {
-            toast('Please add more credits!')
+            toast.error('Please add more credits!')
             return;
         }
 
         if (!formData?.topic || !formData?.script || !formData.videoStyle || !formData?.caption || !formData?.voice) {
             console.log("ERROR", "Enter All Field");
-            toast('Please fill out all details')
+            toast.error('Please fill out all details');
+            if(!formData?.script){
+                toast.error('Please generate script first');
+            }
             return;
         }
         setLoading(true)

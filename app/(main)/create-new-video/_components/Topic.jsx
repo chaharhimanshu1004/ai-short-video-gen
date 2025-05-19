@@ -35,6 +35,10 @@ function Topic({ onHandleInputChange }) {
             toast.error('Please add more credits!')
             return;
         }
+        if(!selectedTopic) {
+            toast.error('Please select a topic')
+            return;
+        }
         setLoading(true);
         setSelectedScriptIndex(null);
         console.log(selectedTopic)
@@ -146,14 +150,13 @@ function Topic({ onHandleInputChange }) {
 
             {!scripts &&
                 <Button
-                    className="mt-6 bg-gradient-to-r from-teal-700 to-cyan-700 hover:from-teal-600 hover:to-cyan-700 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20 transition-all duration-300 font-medium hover:shadow-teal-900/30 hover:translate-y-px"
-                    size="sm"
+                    className="mt-6 bg-gradient-to-r from-teal-700 to-cyan-700 hover:from-teal-600 hover:to-cyan-700 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20 transition-all duration-300 font-medium hover:shadow-teal-900/30 hover:translate-y-px w-full py-6 text-lg"
                     disabled={loading}
                     onClick={GenerateScript}
                 >
                     {loading ?
-                        <Loader2Icon className="animate-spin mr-2" /> :
-                        <SparklesIcon className="mr-2" />
+                        <Loader2Icon className="animate-spin mr-2 h-5 w-5" /> :
+                        <SparklesIcon className="mr-2 h-5 w-5" />
                     }
                     Generate Script
                 </Button>
