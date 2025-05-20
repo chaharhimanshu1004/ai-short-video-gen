@@ -12,7 +12,6 @@ function Provider({ children }) {
     const CreateUser = useMutation(api.users.CreateNewUser);
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            console.log(user);
 
             if (user) {
                 const result = await CreateUser({
@@ -20,7 +19,6 @@ function Provider({ children }) {
                     email: user?.email,
                     pictureURL: user?.photoURL
                 });
-                console.log(result);
                 setUser(result);
             } else {
                 setUser(null);
