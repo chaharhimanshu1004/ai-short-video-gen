@@ -28,6 +28,20 @@ function CreateNewVideo() {
         console.log(formData);
     }
 
+    useEffect(() => {
+        let timer;
+        if (!user) {
+            timer = setTimeout(() => {
+                toast.error('Sorry, you need to login');
+                router.push('/');
+            }, 10000); // 10 seconds timeout
+        }
+        
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [user, router]);
+
     if (!user) {
         return (
             <div className="flex items-center justify-center -mt-12 h-screen">

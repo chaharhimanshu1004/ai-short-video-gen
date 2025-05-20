@@ -58,14 +58,34 @@ function VideoList({ explore = false }) {
     return (
         <div>
             {(!loading) && videoList?.length == 0 ?
-                <div className='flex flex-col items-center 
-                justify-center mt-28 gap-5 p-5 border border-dashed rounded-xl py-16'>
-                    <Image src={'/logo.svg'} alt='logo' width={60} height={60} />
-                    <h2 className='text-gray-400 text-lg'>You dont have any video created. Create new one</h2>
-                    <Link href={'/create-new-video'}>
-                        <Button>+ Create New Video</Button>
-                    </Link>
+                <div className='flex flex-col items-center justify-center mt-28 gap-5 p-8 
+                border border-gray-800 rounded-xl py-16 bg-black/75 backdrop-blur-sm
+                shadow-lg hover:shadow-slate-700/10 transition-all duration-300
+                hover:border-gray-700'>
+                
+                <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full blur-sm opacity-40"></div>
+                    <Image src={'/logo.svg'} alt='logo' width={70} height={70} className="relative z-10" />
                 </div>
+                
+                <h2 className='text-xl font-semibold bg-gradient-to-r from-white via-teal-100 to-cyan-100 bg-clip-text text-transparent'>
+                    No Videos Created Yet
+                </h2>
+                
+                <p className='text-gray-400 text-center mb-2'>
+                    Start creating engaging short videos with just a few clicks
+                </p>
+                
+                <Link href={'/create-new-video'}>
+                    <Button className="bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 
+                        text-white border-0 rounded-xl shadow-lg shadow-teal-900/20 px-5 py-6 text-lg 
+                        transition-all duration-300 font-medium hover:shadow-teal-900/30 hover:translate-y-px">
+                        <span className="flex items-center">
+                            <span className="mr-2">+</span> Create New Video
+                        </span>
+                    </Button>
+                </Link>
+            </div>
                 :
                 <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mt-10'>
                     {videoList?.length > 0 ? videoList?.map((video, index) => (

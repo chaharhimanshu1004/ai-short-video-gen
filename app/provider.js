@@ -22,6 +22,8 @@ function Provider({ children }) {
                 });
                 console.log(result);
                 setUser(result);
+            } else {
+                setUser(null);
             }
 
         })

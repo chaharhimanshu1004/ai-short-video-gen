@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import Authentication from "./authentication"
+import Authentication from "./Authentication"
 import { Sparkles, ChevronRight } from 'lucide-react'
 import { motion } from "framer-motion"
 
