@@ -64,7 +64,7 @@ function Topic({ onHandleInputChange }) {
                 </h2>
                 <Input
                     placeholder="Enter project title"
-                    className="bg-black/40 border-gray-800 focus:border-teal-500/70 focus:ring-1 focus:ring-cyan-600/40 rounded-xl transition-all placeholder:text-gray-500"
+                    className="bg-black/40 border-gray-800 focus:border-teal-500/70 focus:ring-1 focus:ring-cyan-600/40 rounded-xl transition-all placeholder:text-gray-500 py-6 font-bold text-xlg h-14"
                     onChange={(event) => {
                         onHandleInputChange('title', event?.target.value);
                     }}
