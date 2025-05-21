@@ -101,16 +101,16 @@ export const GenerateVideoData = inngest.createFunction(
                                 width: 720,
                                 height: 1280,
                                 input: element?.imagePrompt,
-                                model: 'sdxl',//'flux'
-                                aspectRatio: "1:1"//Applicable to Flux model only
+                                model: process.env.NEXT_PUBLIC_AI_IMAGE_MODEL,
+                                aspectRatio: "1:1"
                             },
                             {
                                 headers: {
                                     'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, // Your API Key
-                                    'Content-Type': 'application/json', // Content Type
+                                    'Content-Type': 'application/json', 
                                 },
                             })
-                        console.log(result.data.image) //Output Result: Base 64 Image
+                        console.log(result.data.image)
                         return result.data.image;
                     })
                 )
@@ -131,6 +131,8 @@ export const GenerateVideoData = inngest.createFunction(
                 return result;
             }
         )
+
+        return true;
 
         /**
          * using Google Cloud (SLOW RENDERING)
@@ -172,57 +174,57 @@ export const GenerateVideoData = inngest.createFunction(
         /**
          * Using AWS Lamda (FAST RENDERING)
          */
-        const RenderVideoUsingAWSLamda = await step.run(
-            "RenderVideoUsingAWSLamda",
-            async () => {
-                //Redner Video
-                const functions = await getFunctions({
-                    region: 'us-east-1',
-                    compatibleOnly: false,
-                });
+        // const RenderVideoUsingAWSLamda = await step.run(
+        //     "RenderVideoUsingAWSLamda",
+        //     async () => {
+        //         //Redner Video
+        //         const functions = await getFunctions({
+        //             region: 'us-east-1',
+        //             compatibleOnly: false,
+        //         });
 
-                const functionName = functions[0].functionName;
+        //         const functionName = functions[0].functionName;
 
-                const { renderId, bucketName } = await renderMediaOnLambda({
-                    region: 'us-east-1',
-                    functionName: process.env.REMOTION_AWS_FUNCTION_NAME,// Or use above function Name
-                    serveUrl: process.env?.REMOTION_AWS_SERVE_URL,
-                    composition: 'youtubeShort',
-                    inputProps: {
-                        videoData: {
-                            audioUrl: GenerateAudioFile,
-                            captionJson: GenerateCaptions,
-                            images: GenerateImages
-                        }
-                    },
-                    codec: 'h264',
-                    imageFormat: 'jpeg',
-                    maxRetries: 1,
-                    framesPerLambda: 20,
-                    privacy: 'public',
-                });
-                const url = process.env.REMOTION_AWS_SITE_URL + '/renders/' + renderId + '/out.mp4'
+        //         const { renderId, bucketName } = await renderMediaOnLambda({
+        //             region: 'us-east-1',
+        //             functionName: process.env.REMOTION_AWS_FUNCTION_NAME,// Or use above function Name
+        //             serveUrl: process.env?.REMOTION_AWS_SERVE_URL,
+        //             composition: 'youtubeShort',
+        //             inputProps: {
+        //                 videoData: {
+        //                     audioUrl: GenerateAudioFile,
+        //                     captionJson: GenerateCaptions,
+        //                     images: GenerateImages
+        //                 }
+        //             },
+        //             codec: 'h264',
+        //             imageFormat: 'jpeg',
+        //             maxRetries: 1,
+        //             framesPerLambda: 20,
+        //             privacy: 'public',
+        //         });
+        //         const url = process.env.REMOTION_AWS_SITE_URL + '/renders/' + renderId + '/out.mp4'
 
-                return url
+        //         return url
 
-                // return functions
+        //         // return functions
 
-            }
-        )
+        //     }
+        // )
 
-        const UpdateDownloadUrl = await step.run(
-            'UpdateDownloadUrl',
-            async () => {
-                const result = await convex.mutation(api.videoData.UpdateVideoDownloadUrl, {
-                    recordId: recordId,
-                    downloadUrl: RenderVideoUsingAWSLamda ?? 'NoURL'
+        // const UpdateDownloadUrl = await step.run(
+        //     'UpdateDownloadUrl',
+        //     async () => {
+        //         const result = await convex.mutation(api.videoData.UpdateVideoDownloadUrl, {
+        //             recordId: recordId,
+        //             downloadUrl: RenderVideoUsingAWSLamda ?? 'NoURL'
 
-                });
-                return result;
-            }
-        )
+        //         });
+        //         return result;
+        //     }
+        // )
 
-        return RenderVideoUsingAWSLamda;
+        // return RenderVideoUsingAWSLamda;
     }
 )
 
