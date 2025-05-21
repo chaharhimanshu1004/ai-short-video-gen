@@ -37,22 +37,19 @@ function RemotionComposition({ videoData }) {
                         { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }
                     )
                     return (
-                        <>
-                            <Sequence key={index} from={startTime} durationInFrames={getDurationFrame()}>
-                                <AbsoluteFill key={index}>
-                                    <Img
-                                        src={item}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            transform: `scale(${scale(index)})`
-                                        }}
-                                    />
-                                </AbsoluteFill>
-
-                            </Sequence>
-                        </>
+                    <Sequence key={index} from={startTime} durationInFrames={getDurationFrame()}>
+                        <AbsoluteFill key={index}>
+                            <Img
+                                src={item}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    transform: `scale(${scale(index)})`
+                                }}
+                            />
+                        </AbsoluteFill>
+                    </Sequence>
                     )
                 })}
 
