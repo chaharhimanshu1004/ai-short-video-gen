@@ -40,136 +40,135 @@ export const GenerateVideoData = inngest.createFunction(
         const { script, topic, title, caption, videoStyle, voice, recordId } = event?.data;
         const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL)
         // Generate Audio File MP3
-        const GenerateAudioFile = await step.run(
-            "GenerateAudioFile",
-            async () => {
-                const result = await axios.post(BASE_URL + '/api/text-to-speech',
-                    {
-                        input: script,
-                        voice: voice
-                    },
-                    {
-                        headers: {
-                            'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, // Your API Key
-                            'Content-Type': 'application/json', // Content Type
-                        },
-                    })
-                return result.data.audio;
-            }
-        )
+        // const GenerateAudioFile = await step.run(
+        //     "GenerateAudioFile",
+        //     async () => {
+        //         const result = await axios.post(BASE_URL + '/api/text-to-speech',
+        //             {
+        //                 input: script,
+        //                 voice: voice
+        //             },
+        //             {
+        //                 headers: {
+        //                     'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, // Your API Key
+        //                     'Content-Type': 'application/json', // Content Type
+        //                 },
+        //             })
+        //         return result.data.audio;
+        //     }
+        // )
 
         //Generate Captions
-        const GenerateCaptions = await step.run(
-            "generateCaptions",
-            async () => {
-                const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
-                // STEP 2: Call the transcribeUrl method with the audio payload and options
-                const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
-                    {
-                        url: GenerateAudioFile,
-                    },
-                    // STEP 3: Configure Deepgram options for audio analysis
-                    {
-                        model: "nova-3",
-                    }
-                );
-                return result.results?.channels[0]?.alternatives[0]?.words;
-            }
-        )
+        // const GenerateCaptions = await step.run(
+        //     "generateCaptions",
+        //     async () => {
+        //         const deepgram = createClient(process.env.NEXT_PUBLIC_DEEPGRAM_API_KEY);
+        //         // STEP 2: Call the transcribeUrl method with the audio payload and options
+        //         const { result, error } = await deepgram.listen.prerecorded.transcribeUrl(
+        //             {
+        //                 url: GenerateAudioFile,
+        //             },
+        //             // STEP 3: Configure Deepgram options for audio analysis
+        //             {
+        //                 model: "nova-3",
+        //             }
+        //         );
+        //         return result.results?.channels[0]?.alternatives[0]?.words;
+        //     }
+        // )
         //Generate Image Prompt from Scrip
-        const GenerateImagePrompts = await step.run(
-            "generateImagePrompt",
-            async () => {
-                const FINAL_PROMPT = ImagePromptScript
-                    .replace('{style}', videoStyle).replace('{script}', script);
-                const result = await GenerateImageScript.sendMessage(FINAL_PROMPT);
-                const resp = JSON.parse(result.response.text());
+        // const GenerateImagePrompts = await step.run(
+        //     "generateImagePrompt",
+        //     async () => {
+        //         const FINAL_PROMPT = ImagePromptScript
+        //             .replace('{style}', videoStyle).replace('{script}', script);
+        //         const result = await GenerateImageScript.sendMessage(FINAL_PROMPT);
+        //         const resp = JSON.parse(result.response.text());
 
-                return resp;
-            }
-        )
+        //         return resp;
+        //     }
+        // )
         //Generate Images using AI
 
-        const GenerateImages = await step.run(
-            "generateImages",
-            async () => {
-                let images = [];
-                images = await Promise.all(
-                    GenerateImagePrompts.map(async (element) => {
-                        const result = await axios.post(BASE_URL + '/api/generate-image',
-                            {
-                                width: 720,
-                                height: 1280,
-                                input: element?.imagePrompt,
-                                model: process.env.NEXT_PUBLIC_AI_IMAGE_MODEL,
-                                aspectRatio: "1:1"
-                            },
-                            {
-                                headers: {
-                                    'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, // Your API Key
-                                    'Content-Type': 'application/json', 
-                                },
-                            })
-                        console.log(result.data.image)
-                        return result.data.image;
-                    })
-                )
-                return images;
-            }
-        )
+        // const GenerateImages = await step.run(
+        //     "generateImages",
+        //     async () => {
+        //         let images = [];
+        //         images = await Promise.all(
+        //             GenerateImagePrompts.map(async (element) => {
+        //                 const result = await axios.post(BASE_URL + '/api/generate-image',
+        //                     {
+        //                         width: 720,
+        //                         height: 1280,
+        //                         input: element?.imagePrompt,
+        //                         model: process.env.NEXT_PUBLIC_AI_IMAGE_MODEL,
+        //                         aspectRatio: "1:1"
+        //                     },
+        //                     {
+        //                         headers: {
+        //                             'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, // Your API Key
+        //                             'Content-Type': 'application/json', 
+        //                         },
+        //                     })
+        //                 console.log(result.data.image)
+        //                 return result.data.image;
+        //             })
+        //         )
+        //         return images;
+        //     }
+        // )
 
         //Save All Data to DB
-        const UpdateDB = await step.run(
-            'UpdateDB',
-            async () => {
-                const result = await convex.mutation(api.videoData.UpdateVideoRecord, {
-                    recordId: recordId,
-                    audioUrl: GenerateAudioFile,
-                    captionJson: GenerateCaptions,
-                    images: GenerateImages
-                });
-                return result;
-            }
-        )
-
-        return true;
+        // const UpdateDB = await step.run(
+        //     'UpdateDB',
+        //     async () => {
+        //         const result = await convex.mutation(api.videoData.UpdateVideoRecord, {
+        //             recordId: recordId,
+        //             audioUrl: GenerateAudioFile,
+        //             captionJson: GenerateCaptions,
+        //             images: GenerateImages
+        //         });
+        //         return result;
+        //     }
+        // )
+ 
 
         /**
          * using Google Cloud (SLOW RENDERING)
          */
-        // const RenderVideo = await step.run(
-        //     "renderVideo",
-        //     async () => {
-        //         //Redner Video
-        //         const services = await getServices({
-        //             region: 'us-east1',
-        //             compatibleOnly: true,
-        //         });
+        const RenderVideo = await step.run(
+            "renderVideo",
+            async () => {
+                //Redner Video
+                const services = await getServices({
+                    region: 'us-east1',
+                    compatibleOnly: true,
+                });
 
-        //         const serviceName = services[0].serviceName;
-        //         const result = await renderMediaOnCloudrun({
-        //             serviceName,
-        //             region: 'us-east1',
-        //             serveUrl: process.env.GCP_SERVE_URL,
-        //             composition: 'youtubeShort',
-        //             inputProps: {
-        //                 videoData: {
-        //                     audioUrl: GenerateAudioFile,
-        //                     captionJson: GenerateCaptions,
-        //                     images: GenerateImages
-        //                 }
-        //             },
-        //             codec: 'h264',
+                const serviceName = services[0].serviceName;
+                const result = await renderMediaOnCloudrun({
+                    serviceName,
+                    region: 'us-east1',
+                    serveUrl: process.env.GCP_SERVE_URL,
+                    composition: 'youtubeShort',
+                    inputProps: {
+                        videoData: {
+                            audioUrl: GenerateAudioFile,
+                            captionJson: GenerateCaptions,
+                            images: GenerateImages
+                        }
+                    },
+                    codec: 'h264',
 
-        //         });
+                });
 
-        //         if (result.type === 'success') {
-        //             console.log(result.bucketName);
-        //             console.log(result.renderId);
-        //         }
-        //         return result?.publicUrl;
-        //     }
-        // )
+                if (result.type === 'success') {
+                    console.log(result.bucketName);
+                    console.log(result.renderId);
+                }
+                return result?.publicUrl;
+            }
+        )
 
         /**
          * Using AWS Lamda (FAST RENDERING)
@@ -212,17 +211,17 @@ export const GenerateVideoData = inngest.createFunction(
         //     }
         // )
 
-        // const UpdateDownloadUrl = await step.run(
-        //     'UpdateDownloadUrl',
-        //     async () => {
-        //         const result = await convex.mutation(api.videoData.UpdateVideoDownloadUrl, {
-        //             recordId: recordId,
-        //             downloadUrl: RenderVideoUsingAWSLamda ?? 'NoURL'
+        const UpdateDownloadUrl = await step.run(
+            'UpdateDownloadUrl',
+            async () => {
+                const result = await convex.mutation(api.videoData.UpdateVideoDownloadUrl, {
+                    recordId: recordId,
+                    downloadUrl: RenderVideo
 
-        //         });
-        //         return result;
-        //     }
-        // )
+                });
+                return result;
+            }
+        )
 
         // return RenderVideoUsingAWSLamda;
     }
