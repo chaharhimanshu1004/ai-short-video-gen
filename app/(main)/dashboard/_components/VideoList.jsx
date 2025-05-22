@@ -15,8 +15,13 @@ function VideoList({ explore = false }) {
     const { user } = useAuthContext();
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        if(!user)setLoading(true);
-        user && GetUserVideoList();
+        if(!user) {
+            setLoading(true);
+            return; // Exit early if no user
+        }
+        
+        // Only proceed with loading videos if user exists
+        GetUserVideoList();
     }, [user])
 
     const GetUserVideoList = async () => {
