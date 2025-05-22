@@ -71,7 +71,7 @@ function CreateNewVideo() {
         setLoading(true)
         // Save Video Data First
         console.log('>>>saving video data');
-        console.log('>>>CreateInitialVideoRecord',CreateInitialVideoRecord)
+        console.log('>>>CreateInitialVideoRecord at bottom',CreateInitialVideoRecord)
         const resp = await CreateInitialVideoRecord({
             title: formData.title,
             topic: formData.topic,
