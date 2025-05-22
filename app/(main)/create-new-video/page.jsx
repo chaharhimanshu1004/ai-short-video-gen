@@ -52,6 +52,8 @@ function CreateNewVideo() {
 
     const GenerateVideo = async () => {
         console.log('>>>user',user);
+        console.log('>>>CreateInitialVideoRecord',CreateInitialVideoRecord)
+
         if (user?.credits <= 0) {
             toast.error('Please add more credits!')
             return;
@@ -65,9 +67,11 @@ function CreateNewVideo() {
             }
             return;
         }
+        
         setLoading(true)
         // Save Video Data First
         console.log('>>>saving video data');
+        console.log('>>>CreateInitialVideoRecord',CreateInitialVideoRecord)
         const resp = await CreateInitialVideoRecord({
             title: formData.title,
             topic: formData.topic,
