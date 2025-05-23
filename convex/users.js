@@ -20,10 +20,10 @@ export const CreateNewUser = mutation({
                 pictureURL: args?.pictureURL,
                 credits: 3
             }
-            //If Not , Insert new user
+            // insert new user
             const result = await ctx.db.insert('users', userData)
-
-            return userData
+            const newUser = { ...userData, _id: result };
+            return newUser;
         }
 
         return user[0];

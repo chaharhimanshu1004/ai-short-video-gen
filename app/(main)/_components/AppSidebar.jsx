@@ -12,8 +12,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 import { Gem, HomeIcon, LucideFileVideo, Search, WalletCards, Sparkles } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useAuthContext } from "@/app/provider"
 import { cn } from "@/lib/utils"
 
@@ -22,11 +21,6 @@ const MenuItems = [
         title: 'Home',
         url: '/dashboard',
         icon: HomeIcon
-    },
-    {
-        title: 'Create New Video',
-        url: '/create-new-video',
-        icon: LucideFileVideo
     },
     {
         title: 'Explore',
@@ -42,6 +36,7 @@ const MenuItems = [
 
 function AppSidebar() {
   const path = usePathname()
+  const router = useRouter()
   const { user } = useAuthContext()
 
   return (
@@ -64,12 +59,13 @@ function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <div className="mx-4 mt-4">
-              <Link href={"/create-new-video"}>
-                <Button className="w-full h-12 bg-gradient-to-r from-teal-600 to-cyan-700 hover:from-teal-700 hover:to-cyan-800 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20">
-                  <LucideFileVideo className="mr-2 h-4 w-4" />
-                  Create New Video
-                </Button>
-              </Link>
+              <Button 
+                onClick={() => router.push("/create-new-video")}
+                className="w-full h-12 bg-gradient-to-r from-teal-600 to-cyan-700 hover:from-teal-700 hover:to-cyan-800 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20"
+              >
+                <LucideFileVideo className="mr-2 h-4 w-4" />
+                Create New Video
+              </Button>
             </div>
 
             <SidebarMenu className="mt-6 px-2">
@@ -85,13 +81,14 @@ function AppSidebar() {
                           ? "bg-gradient-to-r from-teal-500/20 to-cyan-600/20 border border-teal-500/30"
                           : "hover:bg-gray-800",
                       )}
+                      onClick={() => router.push(menu.url)}
                     >
-                      <Link href={menu?.url} className="flex items-center gap-3 px-4 py-3">
+                      <div className="flex items-center gap-3 px-4 py-3">
                         <menu.icon className={cn("w-5 h-5", isActive ? "text-teal-400" : "text-gray-400")} />
                         <span className={cn("font-medium", isActive ? "text-white" : "text-gray-300")}>
                           {menu?.title}
                         </span>
-                      </Link>
+                      </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
@@ -107,11 +104,12 @@ function AppSidebar() {
             <Gem className="text-teal-400 w-5 h-5" />
             <h2 className="text-gray-300 font-medium">{user?.credits || 0} Credits Left</h2>
           </div>
-          <Link href={"/billing"} className="w-full">
-            <Button className="w-full mt-3 bg-gradient-to-r from-teal-600 to-cyan-700 hover:from-teal-700 hover:to-cyan-800 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20">
-              Buy More Credits
-            </Button>
-          </Link>
+          <Button 
+            onClick={() => router.push("/billing")}
+            className="w-full mt-3 bg-gradient-to-r from-teal-600 to-cyan-700 hover:from-teal-700 hover:to-cyan-800 text-white border-0 rounded-xl shadow-lg shadow-teal-900/20"
+          >
+            Buy More Credits
+          </Button>
         </div>
       </SidebarFooter>
     </Sidebar>
