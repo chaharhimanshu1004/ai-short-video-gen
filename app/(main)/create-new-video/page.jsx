@@ -51,8 +51,6 @@ function CreateNewVideo() {
     }
 
     const GenerateVideo = async () => {
-        console.log('>>>user',user);
-        console.log('>>>CreateInitialVideoRecord',CreateInitialVideoRecord)
 
         if (user?.credits <= 0) {
             toast.error('Please add more credits!')
@@ -70,8 +68,6 @@ function CreateNewVideo() {
         
         setLoading(true)
         // Save Video Data First
-        console.log('>>>saving video data');
-        console.log('>>>CreateInitialVideoRecord at bottom',CreateInitialVideoRecord)
         const resp = await CreateInitialVideoRecord({
             title: formData.title,
             topic: formData.topic,
@@ -83,14 +79,12 @@ function CreateNewVideo() {
             createdBy: user?.email,
             credits: user?.credits
         });
-        console.log('>>>saved video data', resp);
 
         const result = await axios.post('/api/generate-video-data', {
             ...formData,
             recordId: resp,
         });
 
-        console.log(result);
         setLoading(false);
         setUser(prev => ({
             ...prev,
