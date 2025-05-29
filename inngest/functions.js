@@ -41,7 +41,7 @@ export const GenerateVideoData = inngest.createFunction(
                     },
                     {
                         headers: {
-                            'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, // Your API Key
+                            'x-api-key': process.env.NEXT_PUBLIC_AI_IMAGE_AUDIO_GEN_KEY, 
                             'Content-Type': 'application/json', // Content Type
                         },
                     })

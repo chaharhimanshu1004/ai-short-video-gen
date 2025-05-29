@@ -60,7 +60,6 @@ function VideoList({ explore = false }) {
     return (
         <div>
             {loading ? (
-                // Loading skeletons when loading is true
                 <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mt-10'>
                     {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
                         <div key={index} className='aspect-[2/3] w-full bg-secondary animate-pulse rounded-xl'>
@@ -68,7 +67,6 @@ function VideoList({ explore = false }) {
                     ))}
                 </div>
             ) : videoList?.length === 0 ? (
-                // No videos message when not loading and list is empty
                 <div className='flex flex-col items-center justify-center mt-28 gap-5 p-8 
                     border border-gray-800 rounded-xl py-16 bg-black/75 backdrop-blur-sm
                     shadow-lg hover:shadow-slate-700/10 transition-all duration-300
@@ -98,7 +96,6 @@ function VideoList({ explore = false }) {
                     </Link>
                 </div>
             ) : (
-                // Show videos when not loading and list has items
                 <div className='grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mt-10'>
                     {videoList.map((video, index) => (
                         <Link key={index} href={'/play-video/' + video?._id}>
