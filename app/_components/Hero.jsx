@@ -14,7 +14,6 @@ function Hero() {
 
   return (
     <div className="relative px-6 md:px-10 pt-10 pb-24 flex flex-col items-center justify-center min-h-[90vh]">
-      {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 opacity-50" />
       
       <div className="absolute inset-0 overflow-hidden">
@@ -23,7 +22,6 @@ function Hero() {
         </div>
       </div>
 
-      {/* Headline with animated gradient text */}
       <motion.div
         initial="initial"
         animate="animate"
@@ -57,7 +55,6 @@ function Hero() {
         </motion.p>
       </motion.div>
 
-      {/* CTA Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,7 +72,6 @@ function Hero() {
         </Authentication>
       </motion.div>
 
-      {/* Feature highlights */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

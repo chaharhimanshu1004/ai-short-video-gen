@@ -27,11 +27,9 @@ function PlayVideo() {
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
             <div>
-                {/* Remotion Player  */}
                 <RemotionPlayer videoData={videoData} />
             </div>
             <div>
-                {/* Video Information  */}
                 <VideoInfo videoData={videoData} />
             </div>
         </div>

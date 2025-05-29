@@ -11,7 +11,6 @@ function Header() {
 
   return (
     <div className="py-6 px-6 md:px-10 flex items-center justify-between">
-      {/* Logo and brand name */}
       <div className="flex items-center gap-3">
         <div className="relative bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl p-2 shadow-lg shadow-teal-900/20">
           <Image src={"/logo.svg"} alt="logo" width={30} height={30} className="relative z-10" />
@@ -22,7 +21,6 @@ function Header() {
         </h2>
       </div>
 
-      {/* Auth or User Profile */}
       <div>
         {!user ? (
           <Authentication>
