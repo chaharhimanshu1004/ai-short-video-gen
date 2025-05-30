@@ -14,6 +14,19 @@ Welcome to my **AI Short Video Generator** app — a smart tool that turns text 
 
 ---
 
+## ⚙️ Tech Stack
+
+1. **Next.js** – Modern React framework for frontend and fullstack routing  
+2. **Convex** – Reactive backend-as-a-database for real-time state handling  
+3. **Inngest** – Serverless workflows and API orchestration  
+4. **Replicate / ai-labs** – For generating visuals and audio using AI models  
+5. **Gemini API** – For generating intelligent and dynamic video scripts  
+6. **Deepgram** – For high-quality speech-to-text captions  
+7. **Remotion** – To stitch audio, visuals, and captions into full HD videos 
+
+## 🏗️ Architecture
+![Project Screenshot](assets/architecture.svg)
+
 ## ⚠️❗ Important Note ❗⚠️
 
 > 🟥 **RE-UPLOADED REPOSITORY** 🟥  
